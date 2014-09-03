@@ -1,4 +1,4 @@
-package com.luugiathuy.apps.remotebluetooth;
+package fyp.ratha.communicator;
 
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
@@ -6,7 +6,7 @@ import java.io.InputStream;
 
 import javax.microedition.io.StreamConnection;
 
-public class ProcessConnectionThread implements Runnable{
+public class ProcessIncomingThread implements Runnable{
 
 	private StreamConnection mConnection;
 	
@@ -15,9 +15,10 @@ public class ProcessConnectionThread implements Runnable{
 	private static final int KEY_RIGHT = 1;
 	private static final int KEY_LEFT = 2;
 	
-	public ProcessConnectionThread(StreamConnection connection)
+	public ProcessIncomingThread(StreamConnection connection)
 	{
 		mConnection = connection;
+
 	}
 	
 	@Override
@@ -27,11 +28,11 @@ public class ProcessConnectionThread implements Runnable{
 			// prepare to receive data
 			InputStream inputStream = mConnection.openInputStream();
 	        
+			
 			System.out.println("waiting for input");
 	        
 	        while (true) {
 	        	int command = inputStream.read();
-	        	
 	        	if (command == EXIT_CMD)
 	        	{	
 	        		System.out.println("finish process");

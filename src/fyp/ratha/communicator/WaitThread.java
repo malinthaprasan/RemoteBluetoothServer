@@ -1,4 +1,4 @@
-package com.luugiathuy.apps.remotebluetooth;
+package fyp.ratha.communicator;
 
 import java.io.IOException;
 
@@ -54,8 +54,10 @@ public class WaitThread implements Runnable{
 				System.out.println("waiting for connection...");
 	            connection = notifier.acceptAndOpen();
 	            
-	            Thread processThread = new Thread(new ProcessConnectionThread(connection));
+	            Thread processThread = new Thread(new ProcessIncomingThread(connection));
 	            processThread.start();
+	            
+	            new ProcessOutConnection(connection);
 	            
 			} catch (Exception e) {
 				e.printStackTrace();
